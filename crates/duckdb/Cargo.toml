@@ -17,8 +17,9 @@ rust-version = { workspace = true }
 name = "duckdb"
 
 [features]
-default = []
+default = ["libduckdb-sys/default"]
 bundled = ["libduckdb-sys/bundled"]
+native-tls = ["libduckdb-sys/native-tls"]
 json = ["libduckdb-sys/json", "bundled"]
 parquet = ["libduckdb-sys/parquet", "bundled"]
 vscalar = ["vtab-arrow"]

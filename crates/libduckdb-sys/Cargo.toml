@@ -15,7 +15,8 @@ edition = { workspace = true }
 rust-version = { workspace = true }
 
 [features]
-default = ["vcpkg", "pkg-config"]
+default = ["vcpkg", "pkg-config", "reqwest/rustls-tls"]
+native-tls = ["reqwest/native-tls"]
 bundled = ["cc"]
 buildtime_bindgen = ["bindgen", "pkg-config", "vcpkg"]
 json = ["bundled"]
@@ -34,7 +35,6 @@ prettyplease = { workspace = true, optional = true }
 quote = { workspace = true, optional = true }
 reqwest = { version = "0.12", default-features = false, features = [
     "blocking",
-    "rustls-tls",
 ] }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
