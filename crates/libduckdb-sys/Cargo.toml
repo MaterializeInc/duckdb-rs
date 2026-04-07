@@ -15,8 +15,11 @@ edition = { workspace = true }
 rust-version = { workspace = true }
 
 [features]
-default = ["vcpkg", "pkg-config", "reqwest/rustls-tls"]
+default = ["vcpkg", "pkg-config", "rustls-tls-no-provider"]
 native-tls = ["reqwest/native-tls"]
+rustls-tls = ["reqwest/rustls-tls"]
+# Uses no-provider feature — build script installs aws-lc-rs provider at startup.
+rustls-tls-no-provider = ["reqwest/rustls-tls-webpki-roots-no-provider"]
 bundled = ["cc"]
 buildtime_bindgen = ["bindgen", "pkg-config", "vcpkg"]
 json = ["bundled"]
@@ -27,6 +30,8 @@ winduckdb = []
 loadable-extension = ["prettyplease", "quote", "syn"]
 
 [build-dependencies]
+aws-lc-rs = "1"
+rustls = { version = "0.23", default-features = false, features = ["aws_lc_rs"] }
 bindgen = { workspace = true, features = ["runtime"], optional = true }
 cc = { workspace = true, features = ["parallel"], optional = true }
 flate2 = { workspace = true }

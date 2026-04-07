@@ -21,6 +21,11 @@ fn is_compiler(compiler_name: &str) -> bool {
 }
 
 fn main() {
+    // Install the aws-lc-rs crypto provider for reqwest when using
+    // rustls-tls-webpki-roots-no-provider. Build scripts run as separate
+    // processes without the application's provider setup.
+    let _ = rustls::crypto::aws_lc_rs::default_provider().install_default();
+
     let out_dir = env::var("OUT_DIR").unwrap();
     let out_path = Path::new(&out_dir).join("bindgen.rs");
     #[cfg(feature = "bundled")]
